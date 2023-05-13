@@ -27,25 +27,38 @@ class Album {
         this.played += 1
     }
     display = function() {
-        return `${this.artist} : ${this.title}. The album has been played ${this.played} times.`
+        document.getElementById("favoriteAlbum").innerHTML = `${this.artist} : ${this.title}. The album has been played ${this.played} times.`
     }
 }
 
-var jbox = new Jukebox()
-const album1 = new Album('Operation Ivy', 'Energy')
-const album2 = new Album('Blink 182', 'Dude Ranch')
-const album3 = new Album('New Found Glory', 'Sticks and Stones')
+let jbox = new Jukebox();
+let albumSel = document.getElementById("album");
 
-jbox.addAlbum(album1)
-jbox.addAlbum(album2)
-jbox.addAlbum(album3)
+let arrAlbums = [
+                ['Operation Ivy', 'Energy'],
+                ['Blink 182', 'Dude Ranch'],
+                ['New Found Glory', 'Sticks and Stones'],
+                ['Carole King', 'Tapestry']
+                ]
 
-album1.play()
-album2.play()
-album2.play()
-album2.play()
-album2.play()
-album2.play()
-album3.play()
+window.addEventListener("load", function() { 
+    for (let i = 0; i < arrAlbums.length; i++) {
+        albumSel.options[albumSel.options.length] = new Option(`${arrAlbums[i][0]}, ${arrAlbums[i][1]}`);
+    }
+})
 
-console.log(`Your favorite album is: ${jbox.favoriteAlbum()}`)
+for (let album of arrAlbums) {
+    let newAlbum = new Album(album[0], album[1]);
+    jbox.addAlbum(newAlbum);
+}
+
+let playButton = document.getElementById("play");
+playButton.addEventListener("click", function() {
+    let albumIndex = albumSel.selectedIndex - 1;
+    jbox.albums[albumIndex].play();
+})
+
+let favoriteButton = document.getElementById("favorite");
+favoriteButton.addEventListener("click", function() {
+    jbox.favoriteAlbum();
+})
