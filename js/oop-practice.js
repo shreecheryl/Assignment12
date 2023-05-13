@@ -86,11 +86,11 @@
 // cat5.speak();
 
 // STEP 9
-String.prototype.findWords = function(word) {
-    let re = new RegExp(`\\b${word}\\b`, "gim");
-    let arr = this.match(re);
-    alert(arr.length);
-}
+// String.prototype.findWords = function(word) {
+//     let re = new RegExp(`\\b${word}\\b`, "gim");
+//     let arr = this.match(re);
+//     alert(arr.length);
+// }
 
-let text = "This is a test for my own String method. This is just a test. Testing testing testing. Yay...my test is working!"
-text.findWords("test");
+// let text = "This is a test for my own String method. This is just a test. Testing testing testing. Yay...my test is working!"
+// text.findWords("test");
